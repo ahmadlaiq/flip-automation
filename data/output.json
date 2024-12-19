@@ -1,0 +1,14 @@
+{
+  "id": "1",
+  "data": [
+    {
+      "transfer_sebelum": "2024-12-19T09:00:00Z",
+      "nama_bank": "BCA",
+      "atas_nama": "Flip",
+      "virtual_account": "1234567890123456",
+      "diteruskan_ke": "Ahmad Laiq",
+      "nominal": 150000,
+      "timestamp": "2024-12-19T09:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1234567890",
+    "metode_transfer": {
+      "nama_bank": "BCA"
+    },
+    "tujuan": [
+      {
+        "nama_tujuan": "Ahmad Laiq",
+        "nomor_rekening_tujuan": "0371001234567",
+        "bank_tujuan": "BCA",
+        "jumlah_transfer_tujuan": 150000,
+        "timestamp": "2024-12-19T09:00:00Z",
+        "catatan_transfer": "Pembayaran bulanan"
+      },
+      {
+        "nama_tujuan": "Siti Aisyah",
+        "nomor_rekening_tujuan": "9001234567890",
+        "bank_tujuan": "Mandiri",
+        "jumlah_transfer_tujuan": 250000,
+        "timestamp": "2024-12-19T09:15:00Z",
+        "catatan_transfer": "Tagihan listrik"
+      }
+    ]
+  },
+  {
+    "id": "2234567891",
+    "metode_transfer": {
+      "nama_bank": "Mandiri"
+    },
+    "tujuan": [
+      {
+        "nama_tujuan": "Rizky Hidayat",
+        "nomor_rekening_tujuan": "1234567890123",
+        "bank_tujuan": "BNI",
+        "jumlah_transfer_tujuan": 300000,
+        "timestamp": "2024-12-19T09:30:00Z",
+        "catatan_transfer": "Gaji Desember"
+      },
+      {
+        "nama_tujuan": "Dewi Kusuma",
+        "nomor_rekening_tujuan": "0021234567890",
+        "bank_tujuan": "BRI",
+        "jumlah_transfer_tujuan": 175000,
+        "timestamp": "2024-12-19T09:45:00Z",
+        "catatan_transfer": "Uang makan"
+      }
+    ]
+  },
+  {
+    "id": "3234567892",
+    "metode_transfer": {
+      "nama_bank": "BNI"
+    },
+    "tujuan": [
+      {
+        "nama_tujuan": "Fajar Pratama",
+        "nomor_rekening_tujuan": "0141234567890",
+        "bank_tujuan": "BCA",
+        "jumlah_transfer_tujuan": 220000,
+        "timestamp": "2024-12-19T10:00:00Z",
+        "catatan_transfer": "Biaya operasional"
+      },
+      {
+        "nama_tujuan": "Lina Permata",
+        "nomor_rekening_tujuan": "2051234567890",
+        "bank_tujuan": "CIMB Niaga",
+        "jumlah_transfer_tujuan": 180000,
+        "timestamp": "2024-12-19T10:15:00Z",
+        "catatan_transfer": "Pembelian barang"
+      }
+    ]
+  },
+  {
+    "id": "4234567893",
+    "metode_transfer": {
+      "nama_bank": "BRI"
+    },
+    "tujuan": [
+      {
+        "nama_tujuan": "Hendra Saputra",
+        "nomor_rekening_tujuan": "0131234567890",
+        "bank_tujuan": "Permata",
+        "jumlah_transfer_tujuan": 200000,
+        "timestamp": "2024-12-19T10:30:00Z",
+        "catatan_transfer": "Komisi penjualan"
+      },
+      {
+        "nama_tujuan": "Nina Kartika",
+        "nomor_rekening_tujuan": "0071234567890",
+        "bank_tujuan": "Danamon",
+        "jumlah_transfer_tujuan": 275000,
+        "timestamp": "2024-12-19T10:45:00Z",
+        "catatan_transfer": "Biaya pendidikan"
+      }
+    ]
+  },
+  {
+    "id": "5234567894",
+    "metode_transfer": {
+      "nama_bank": "BCA"
+    },
+    "tujuan": [
+      {
+        "nama_tujuan": "Agus Santoso",
+        "nomor_rekening_tujuan": "0281234567890",
+        "bank_tujuan": "OCBC NISP",
+        "jumlah_transfer_tujuan": 310000,
+        "timestamp": "2024-12-19T11:00:00Z",
+        "catatan_transfer": "Pengembalian pinjaman"
+      },
+      {
+        "nama_tujuan": "Putri Melati",
+        "nomor_rekening_tujuan": "0371009876543",
+        "bank_tujuan": "BCA",
+        "jumlah_transfer_tujuan": 190000,
+        "timestamp": "2024-12-19T11:15:00Z",
+        "catatan_transfer": "Bonus akhir tahun"
+      }
+    ]
+  }
+]

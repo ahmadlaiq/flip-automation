@@ -369,8 +369,9 @@ const wdio = require("webdriverio");
   await elementHasilBRI.waitForDisplayed({ timeout: 5000 });
   console.log("Hasil pencarian Bank BRI ditemukan. Klik hasil pencarian...");
   await elementHasilBRI.click();
-
+  await elementHasilBRI.click();
   console.log("Hasil pencarian Bank BRI telah diklik.");
+  
 
   // Tunggu sebelum klik Transfer dengan Bank Transfer
   await driver.pause(4000);

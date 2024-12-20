@@ -1,0 +1,260 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Form Transfer Flip</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">Form Transfer Flip</h1>
+      <form id="transaction-form">
+        <!-- Metode Transfer (Bank Pengirim) -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="mb-0">Bank Pengirim</h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label class="form-label">Pilih Bank</label>
+              <select class="form-select" name="bank_pengirim" required>
+                <option value="" disabled selected>Pilih Bank Pengirim</option>
+                <option value="Mandiri">Mandiri</option>
+                <option value="BRI">BRI</option>
+                <option value="BNI">BNI</option>
+                <option value="BCA">BCA</option>
+                <option value="BSI">BSI</option>
+                <option value="CIMB">CIMB</option>
+                <option value="Muamalat">Muamalat</option>
+                <option value="Danamon">Danamon</option>
+                <option value="Permata">Permata</option>
+                <option value="Digibank">Digibank</option>
+                <option value="Jenius">Jenius</option>
+                <option value="BTN">BTN</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daftar Tujuan Transfer -->
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Daftar Tujuan Transfer</h5>
+          </div>
+          <div class="card-body">
+            <div id="transaction-container">
+              <div class="transaction-item border p-3 mb-3">
+                <div class="mb-3">
+                  <label class="form-label">Nama Penerima</label>
+                  <input type="text" class="form-control" name="nama[]" required />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">No. Rekening</label>
+                  <input type="text" class="form-control" name="rekening[]" required />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Nominal</label>
+                  <input type="number" class="form-control" name="nominal[]" required />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Bank Tujuan</label>
+                  <select class="form-select" name="bank_tujuan[]" required>
+                    <option value="" disabled selected>Pilih Bank</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BNI">BNI</option>
+                    <option value="BRI">BRI</option>
+                    <option value="BSI">BSI (Bank Syariah Indonesia)</option>
+                    <option value="Mandiri">Mandiri</option>
+                    <option value="CIMB">CIMB</option>
+                    <option value="Muamalat">Muamalat</option>
+                    <option value="Danamon">Danamon</option>
+                    <option value="Permata">Permata</option>
+                    <option value="Digibank">Digibank</option>
+                    <option value="Jenius">Jenius</option>
+                    <option value="BTN">BTN</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Catatan Transfer</label>
+                  <textarea
+                    class="form-control"
+                    name="catatan[]"
+                    rows="2"
+                    placeholder="Tambahkan catatan..."
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn-danger remove-transaction-btn"
+                  style="display: none"
+                >
+                  Hapus Tujuan Transfer
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="add-transaction-btn"
+            >
+              Tambah Tujuan Transfer
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Mulai Transfer</button>
+      </form>
+
+      <div id="loading" style="display: none" class="text-center mt-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Sedang memproses transfer...</p>
+      </div>
+
+      <div id="status" class="alert mt-4" style="display: none"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const transactionContainer = document.getElementById("transaction-container");
+      const addTransactionBtn = document.getElementById("add-transaction-btn");
+      const form = document.getElementById("transaction-form");
+      const loading = document.getElementById("loading");
+      const status = document.getElementById("status");
+
+      // Fungsi untuk menambahkan tujuan transfer baru
+      addTransactionBtn.addEventListener("click", () => {
+        const newTransaction = document.createElement("div");
+        newTransaction.classList.add("transaction-item", "border", "p-3", "mb-3");
+        newTransaction.innerHTML = `
+          <div class="mb-3">
+            <label class="form-label">Nama Penerima</label>
+            <input type="text" class="form-control" name="nama[]" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">No. Rekening</label>
+            <input type="text" class="form-control" name="rekening[]" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Nominal</label>
+            <input type="number" class="form-control" name="nominal[]" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Bank Tujuan</label>
+            <select class="form-select" name="bank_tujuan[]" required>
+              <option value="" disabled selected>Pilih Bank</option>
+              <option value="BCA">BCA</option>
+              <option value="BNI">BNI</option>
+              <option value="BRI">BRI</option>
+              <option value="BSI">BSI (Bank Syariah Indonesia)</option>
+              <option value="Mandiri">Mandiri</option>
+              <option value="CIMB">CIMB</option>
+              <option value="Muamalat">Muamalat</option>
+              <option value="Danamon">Danamon</option>
+              <option value="Permata">Permata</option>
+              <option value="Digibank">Digibank</option>
+              <option value="Jenius">Jenius</option>
+              <option value="BTN">BTN</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Catatan Transfer</label>
+            <textarea class="form-control" name="catatan[]" rows="2" placeholder="Tambahkan catatan..." required></textarea>
+          </div>
+
+          <button type="button" class="btn btn-danger remove-transaction-btn">Hapus Tujuan Transfer</button>
+        `;
+        transactionContainer.appendChild(newTransaction);
+        updateRemoveButtons();
+      });
+
+      // Fungsi untuk mengatur tampilan tombol hapus
+      function updateRemoveButtons() {
+        const removeButtons = document.querySelectorAll(".remove-transaction-btn");
+        removeButtons.forEach((button) => {
+          if (document.querySelectorAll(".transaction-item").length > 1) {
+            button.style.display = "block";
+          } else {
+            button.style.display = "none";
+          }
+        });
+      }
+
+      // Event listener untuk menghapus transaksi
+      transactionContainer.addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-transaction-btn")) {
+          e.target.closest(".transaction-item").remove();
+          updateRemoveButtons();
+        }
+      });
+
+      // Handle form submission
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = {
+          bank_pengirim: document.getElementsByName("bank_pengirim")[0].value,
+          nama: [...document.getElementsByName("nama[]")].map(
+            (input) => input.value
+          ),
+          rekening: [...document.getElementsByName("rekening[]")].map(
+            (input) => input.value
+          ),
+          nominal: [...document.getElementsByName("nominal[]")].map(
+            (input) => input.value
+          ),
+          bank_tujuan: [...document.getElementsByName("bank_tujuan[]")].map(
+            (input) => input.value
+          ),
+          catatan: [...document.getElementsByName("catatan[]")].map(
+            (input) => input.value
+          ),
+        };
+
+        loading.style.display = "block";
+        status.style.display = "none";
+
+        try {
+          const response = await fetch("/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+
+          const result = await response.json();
+
+          status.textContent = result.message;
+          status.className = result.success
+            ? "alert alert-success"
+            : "alert alert-danger";
+          status.style.display = "block";
+        } catch (error) {
+          status.textContent = "Terjadi kesalahan dalam memproses permintaan";
+          status.className = "alert alert-danger";
+          status.style.display = "block";
+        } finally {
+          loading.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 const wdio = require("webdriverio");
 
-async function runFlipAutomation(transactions) {
+async function runFlipAutomation(transactions, bank_pengirim) {
   const opts = {
     path: "/",
     port: 4723,
@@ -150,11 +150,11 @@ async function runFlipAutomation(transactions) {
     );
     await elementCariBank.waitForDisplayed({ timeout: 5000 });
     await elementCariBank.click();
-    await elementCariBank.setValue("BRI");
+    await elementCariBank.setValue(bank_pengirim);
 
     await driver.pause(4000);
     const elementHasilBRI = await driver.$(
-      '//android.view.ViewGroup[@resource-id="id.flip.staging:id/PAYMENT_METHOD_SLIDER-PRESSABLE-BANK_ITEM-BRI"]'
+      `//android.view.ViewGroup[@resource-id="id.flip.staging:id/PAYMENT_METHOD_SLIDER-PRESSABLE-BANK_ITEM-${bank_pengirim}"]`
     );
     await elementHasilBRI.waitForDisplayed({ timeout: 5000 });
     await elementHasilBRI.click();

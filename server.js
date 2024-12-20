@@ -34,7 +34,7 @@ app.post('/submit', async (req, res) => {
     console.log('Memulai otomatisasi dengan data:', transactions);
     console.log('Bank Pengirim:', bank_pengirim);
     
-    const result = await runFlipAutomation(transactions);
+    const result = await runFlipAutomation(transactions, bank_pengirim);
     res.json(result);
   } catch (error) {
     console.error('Error:', error);
